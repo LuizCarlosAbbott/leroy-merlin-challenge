@@ -13,4 +13,4 @@ Steps to complete the challenge:
 - [ ] Create tests to ensure last step will work as it should;
 - [ ] Create READ, UPDATE, DELETE operations on api-gateway;
 - [ ] Create tests to ensure last step will work as it should;
-- [ ] Upload api-gateway to Heroku connected to a database (without the RabbitMQ connection?);
+- [ ] Upload api-gateway to Heroku connected to a database (without the RabbitMQ connection);
