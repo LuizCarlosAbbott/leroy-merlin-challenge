@@ -24,8 +24,8 @@ export class ProductController {
   @Bind(UploadedFile())
   async uploadFile(file: IFile): Promise<string> {
     try {
-      console.log(file);
-      return await this.productService.create(file);
+      const content = file.buffer.toString();
+      return await this.productService.create({ ...file, content });
     } catch (e) {
       return e.message;
     }

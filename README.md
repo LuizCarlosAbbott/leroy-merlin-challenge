@@ -7,7 +7,8 @@ Steps to complete the challenge:
 - [x] Create docker-compose.yml for MongoDB and RabbitMQ;
 - [x] Connect consumer and api-gateway to RabbitMQ and MongoDB;
 - [ ] Create a documentation to describe the project and how to launch it;
-- [ ] Treat excel and write on database on the consumer;
+- [x] Treat excel and write on database on the consumer;
+- [ ] Validate file format;
 - [ ] Create tests to ensure last step will work as it should;
 - [ ] Create endpoint to verify if the excel file was processed (using database?);
 - [ ] Create tests to ensure last step will work as it should;
