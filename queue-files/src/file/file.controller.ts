@@ -1,8 +1,9 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Logger } from '@nestjs/common';
 import { Ctx, EventPattern, Payload, RmqContext } from '@nestjs/microservices';
 import { FileService } from './file.service';
 import { IFile } from './interfaces/file.interface';
 
+const logger = new Logger('Queue Files');
 @Controller()
 export class FileController {
   constructor(private readonly fileService: FileService) {}
@@ -15,9 +16,12 @@ export class FileController {
     try {
       await this.fileService.create(file);
       channel.ack(message);
+      logger.log('File was succesfull processed');
     } catch (error) {
       channel.reject(message, false);
-      // console.log(error); //ADD LOGER to errors
+      logger.error(
+        'An error occurred during the file processing: ' + error.message,
+      );
     }
   }
 }

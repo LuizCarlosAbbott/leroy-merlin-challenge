@@ -3,6 +3,9 @@ import { ProductService } from './product.service';
 import { ProductController } from './product.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ClientsModule, RmqOptions, Transport } from '@nestjs/microservices';
+import { MongooseModule } from '@nestjs/mongoose';
+import { MongoConnectionName } from './enums/mongo-connection-name.enum';
+import { mongoprocessedFileIdSchema } from './schemas/mongo-processed-files.schema';
 
 @Module({
   imports: [
@@ -26,6 +29,15 @@ import { ClientsModule, RmqOptions, Transport } from '@nestjs/microservices';
         inject: [ConfigService],
       },
     ]),
+    MongooseModule.forFeature(
+      [
+        {
+          name: 'processedFiles',
+          schema: mongoprocessedFileIdSchema,
+        },
+      ],
+      MongoConnectionName.LEROY_PRODUCTS,
+    ),
   ],
   controllers: [ProductController],
   providers: [ProductService],

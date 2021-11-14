@@ -5,5 +5,6 @@ export interface IFile {
   mimetype: string;
   buffer: Buffer;
   size: number;
-  content?: string;
+  content: string;
+  processedFileId: string;
 }

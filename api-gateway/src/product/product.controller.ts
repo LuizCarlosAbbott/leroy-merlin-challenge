@@ -9,11 +9,17 @@ import {
   UseInterceptors,
   UploadedFile,
   Bind,
+  Logger,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { IFile } from './file.interface';
+import { IFile } from './interfaces/file.interface';
+import { randomBytes } from 'crypto';
+
+const logger = new Logger('API Gateway');
 
 @Controller('product')
 export class ProductController {
@@ -25,20 +31,24 @@ export class ProductController {
   async uploadFile(file: IFile): Promise<string> {
     try {
       const content = file.buffer.toString();
-      return await this.productService.create({ ...file, content });
-    } catch (e) {
-      return e.message;
+      const processedFileId = randomBytes(64).toString('hex');
+      console.log(processedFileId);
+      const response = await this.productService.create({
+        ...file,
+        content,
+        processedFileId,
+      });
+      logger.log('File sended to queue');
+      return response;
+    } catch (error) {
+      logger.error('Something went wrong with the request: ' + error.message);
+      return 'Something went wrong with your request';
     }
   }
 
-  @Get()
-  findAll() {
-    return this.productService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.productService.findOne(+id);
+  @Get('processedfile/:id')
+  findProcessedFile(@Param('id') id: string) {
+    return this.productService.findProcessedFile(id);
   }
 
   @Patch(':id')

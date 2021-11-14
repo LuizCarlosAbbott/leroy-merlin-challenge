@@ -4,6 +4,7 @@ import { FileController } from './file.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { mongoProductsSchema } from './schemas/mongo-products.schema';
 import { MongoConnectionName } from './enums/mongo-connection-name.enum';
+import { mongoprocessedFileIdSchema } from './schemas/mongo-processed-files.schema';
 
 @Module({
   imports: [
@@ -12,6 +13,15 @@ import { MongoConnectionName } from './enums/mongo-connection-name.enum';
         {
           name: 'products',
           schema: mongoProductsSchema,
+        },
+      ],
+      MongoConnectionName.LEROY_PRODUCTS,
+    ),
+    MongooseModule.forFeature(
+      [
+        {
+          name: 'processedFiles',
+          schema: mongoprocessedFileIdSchema,
         },
       ],
       MongoConnectionName.LEROY_PRODUCTS,
