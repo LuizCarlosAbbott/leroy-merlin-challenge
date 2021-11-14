@@ -1,16 +1,31 @@
 import { Controller } from '@nestjs/common';
-import { MessagePattern, Payload } from '@nestjs/microservices';
+import {
+  Ctx,
+  EventPattern,
+  MessagePattern,
+  Payload,
+  RmqContext,
+} from '@nestjs/microservices';
 import { FileService } from './file.service';
-import { CreateFileDto } from './dto/create-file.dto';
 import { UpdateFileDto } from './dto/update-file.dto';
+import { IFile } from './file.interface';
 
 @Controller()
 export class FileController {
   constructor(private readonly fileService: FileService) {}
 
-  @MessagePattern('createFile')
-  create(@Payload() createFileDto: CreateFileDto) {
-    return this.fileService.create(createFileDto);
+  @EventPattern('createFile')
+  create(@Payload() file: IFile, @Ctx() context: RmqContext) {
+    const channel = context.getChannelRef();
+    const message = context.getMessage();
+
+    try {
+      console.log(file);
+      channel.ack(message);
+      return this.fileService.create(file);
+    } catch (error) {
+      channel.reject(message, false);
+    }
   }
 
   @MessagePattern('findAllFile')

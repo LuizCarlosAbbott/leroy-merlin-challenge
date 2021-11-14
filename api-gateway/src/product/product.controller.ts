@@ -1,15 +1,34 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseInterceptors,
+  UploadedFile,
+  Bind,
+} from '@nestjs/common';
 import { ProductService } from './product.service';
-import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { IFile } from './file.interface';
 
 @Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
-  @Post()
-  create(@Body() createProductDto: CreateProductDto) {
-    return this.productService.create(createProductDto);
+  @Post('upload')
+  @UseInterceptors(FileInterceptor('file'))
+  @Bind(UploadedFile())
+  async uploadFile(file: IFile): Promise<string> {
+    try {
+      console.log(file);
+      return await this.productService.create(file);
+    } catch (e) {
+      return e.message;
+    }
   }
 
   @Get()

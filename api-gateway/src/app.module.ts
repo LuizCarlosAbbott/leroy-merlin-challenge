@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ProductModule } from './product/product.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -15,13 +13,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       connectionName: 'leroy-products',
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        uri: 'mongodb://localhost:27017/products?readPreference=primary&ssl=false', // configService.get('LEROY_PRODUCTS'),
+        uri: configService.get('MONGODB_LEROY_PRODUCTS_URL'),
       }),
       inject: [ConfigService],
     }),
     ProductModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

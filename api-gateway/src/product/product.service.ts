@@ -1,11 +1,20 @@
-import { Injectable } from '@nestjs/common';
-import { CreateProductDto } from './dto/create-product.dto';
+import { Inject, Injectable } from '@nestjs/common';
+import { ClientProxy } from '@nestjs/microservices';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { IFile } from './file.interface';
 
 @Injectable()
 export class ProductService {
-  create(createProductDto: CreateProductDto) {
-    return 'This action adds a new product';
+  constructor(@Inject('api-service') private send2Queue: ClientProxy) {}
+
+  create(file: IFile): Promise<string> {
+    return this.send2Queue
+      .emit('createFile', file)
+      .toPromise()
+      .then(() => 'The content was send to the queue')
+      .catch((error) => {
+        return 'The content was NOT send to the queue';
+      });
   }
 
   findAll() {

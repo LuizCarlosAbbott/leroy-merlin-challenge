@@ -9,14 +9,14 @@ import { ClientsModule, RmqOptions, Transport } from '@nestjs/microservices';
     ClientsModule.registerAsync([
       {
         imports: [ConfigModule],
-        name: 'queue-files',
+        name: 'api-service',
         useFactory: async (
           configService: ConfigService,
         ): Promise<RmqOptions> => ({
           transport: Transport.RMQ,
           options: {
-            urls: ['amqp://rabbitmquser:rabbitmqpass@127.0.0.1:5672'], // [configService.get('RABBITMQ_URL_CONNECTION')],
-            queue: 'content',
+            urls: configService.get('RABBITMQ_URL_CONNECTION'),
+            queue: 'files',
             queueOptions: {
               durable: false,
             },
