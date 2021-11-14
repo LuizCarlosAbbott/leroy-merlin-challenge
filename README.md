@@ -4,7 +4,7 @@ Steps to complete the challenge:
 
 - [x] Create api-gateway (RESTful API) to handle all requests;
 - [x] Create a consumer (Microservice) to handle the sheets;
-- [ ] Create docker-compose.yml for MongoDB and RabbitMQ;
+- [x] Create docker-compose.yml for MongoDB and RabbitMQ;
 - [ ] Connect consumer and api-gateway to RabbitMQ and MongoDB;
 - [ ] Create a documentation to describe the project and how to launch it;
 - [ ] Treat excel and write on database on the consumer;
