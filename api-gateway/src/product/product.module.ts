@@ -6,6 +6,7 @@ import { ClientsModule, RmqOptions, Transport } from '@nestjs/microservices';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MongoConnectionName } from './enums/mongo-connection-name.enum';
 import { mongoprocessedFileIdSchema } from './schemas/mongo-processed-files.schema';
+import { mongoProductsSchema } from './schemas/mongo-products.schema';
 
 @Module({
   imports: [
@@ -34,6 +35,15 @@ import { mongoprocessedFileIdSchema } from './schemas/mongo-processed-files.sche
         {
           name: 'processedFiles',
           schema: mongoprocessedFileIdSchema,
+        },
+      ],
+      MongoConnectionName.LEROY_PRODUCTS,
+    ),
+    MongooseModule.forFeature(
+      [
+        {
+          name: 'products',
+          schema: mongoProductsSchema,
         },
       ],
       MongoConnectionName.LEROY_PRODUCTS,

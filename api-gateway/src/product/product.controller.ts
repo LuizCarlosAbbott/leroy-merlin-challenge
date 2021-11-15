@@ -14,10 +14,10 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
-import { UpdateProductDto } from './dto/update-product.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { IFile } from './interfaces/file.interface';
 import { randomBytes } from 'crypto';
+import { IProduct } from './interfaces/product.interface';
 
 const logger = new Logger('API Gateway');
 
@@ -42,22 +42,87 @@ export class ProductController {
       return response;
     } catch (error) {
       logger.error('Something went wrong with the request: ' + error.message);
-      return 'Something went wrong with your request';
+      throw new HttpException(
+        'Something went wrong with your request',
+        HttpStatus.BAD_REQUEST,
+      );
     }
   }
 
   @Get('processedfile/:id')
-  findProcessedFile(@Param('id') id: string) {
-    return this.productService.findProcessedFile(id);
+  async findProcessedFile(@Param('id') id: string): Promise<string> {
+    try {
+      const processedFile = await this.productService.findProcessedFile(id);
+      logger.log('Processed file: ' + id + ' was successfully found');
+      return processedFile;
+    } catch (error) {
+      logger.error('Processed file: ' + id + " wasn't successfully found");
+      throw new HttpException(
+        'Something went wrong with your request',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
-    return this.productService.update(+id, updateProductDto);
+  @Get(':lm')
+  async findOneProduct(@Param('lm') lm: string): Promise<IProduct> {
+    try {
+      const product = await this.productService.findOneProduct(+lm);
+
+      logger.log('Product with lm: ' + lm + ' was successfully searched');
+      return product;
+    } catch (error) {
+      logger.error(
+        'Product with lm: ' +
+          lm +
+          " wassn't successfully found, error: " +
+          error,
+      );
+      throw new HttpException(
+        'Something went wrong with your request',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.productService.remove(+id);
+  @Patch(':lm')
+  async updateOneProduct(
+    @Param('lm') lm: string,
+    @Body() product: IProduct,
+  ): Promise<IProduct> {
+    try {
+      const updatedProduct = await this.productService.updateOneProduct(
+        +lm,
+        product,
+      );
+      logger.log('Product with lm: ' + lm + ' was successfully updated');
+      return updatedProduct;
+    } catch (error) {
+      logger.error(
+        'Product with lm: ' +
+          lm +
+          " wasn't successfully updated, error: " +
+          error,
+      );
+      throw new HttpException(
+        'Something went wrong with your request',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
+
+  @Delete(':lm')
+  async removeOneProduct(@Param('lm') lm: string): Promise<string> {
+    try {
+      const result = await this.productService.removeOneProduct(+lm);
+      logger.log(result);
+      return result;
+    } catch (error) {
+      logger.error('Product with lm: ' + lm + " wasn't successfully removed");
+      throw new HttpException(
+        'Something went wrong with your request',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
   }
 }

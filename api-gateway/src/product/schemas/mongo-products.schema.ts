@@ -8,4 +8,4 @@ export const mongoProductsSchema = new mongoose.Schema({
   category: Number,
 });
 
-mongoProductsSchema.index({ lm: 1, category: 1 }, { unique: true });
+mongoProductsSchema.index({ lm: 1 }, { unique: true });

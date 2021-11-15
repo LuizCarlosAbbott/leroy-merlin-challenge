@@ -2,9 +2,9 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { UpdateProductDto } from './dto/update-product.dto';
 import { IFile } from './interfaces/file.interface';
 import { IMongoProcessedFile } from './interfaces/processed-file.interface';
+import { IMongoProduct, IProduct } from './interfaces/product.interface';
 
 @Injectable()
 export class ProductService {
@@ -12,6 +12,8 @@ export class ProductService {
     @Inject('api-service') private send2Queue: ClientProxy,
     @InjectModel('processedFiles')
     private readonly processedFilesModel: Model<IMongoProcessedFile>,
+    @InjectModel('products')
+    private readonly productsModel: Model<IMongoProduct>,
   ) {}
 
   create(file: IFile): Promise<string> {
@@ -27,11 +29,6 @@ export class ProductService {
         return 'The content was NOT send to the queue';
       });
   }
-
-  findAll() {
-    return `This action returns all product`;
-  }
-
   async findProcessedFile(processedFileId: string): Promise<string> {
     const processedFile = await this.processedFilesModel.findOne({
       processedFileId,
@@ -42,11 +39,26 @@ export class ProductService {
       : "The file wasn't processed successfully";
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+  async findAllProducts(): Promise<IProduct[]> {
+    return await this.productsModel.find();
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} product`;
+  async findOneProduct(lm: number): Promise<IProduct> {
+    return await this.productsModel.findOne({ lm });
+  }
+
+  async updateOneProduct(lm: number, product: IProduct): Promise<IProduct> {
+    const { name, free_shipping, description, category } =
+      await this.productsModel.findOneAndUpdate({ lm }, { ...product, lm });
+
+    return { lm, name, free_shipping, description, category, ...product };
+  }
+
+  async removeOneProduct(lm: number): Promise<string> {
+    const removedProduct = await this.productsModel.findOneAndRemove({ lm });
+
+    return (
+      'Product with lm: ' + removedProduct.lm + ' was successfully removed'
+    );
   }
 }
