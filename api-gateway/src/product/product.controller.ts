@@ -68,6 +68,22 @@ export class ProductController {
     }
   }
 
+  @Get()
+  async findAllProducts(): Promise<IProduct[]> {
+    try {
+      const products = await this.productService.findAllProducts();
+
+      logger.log('Products were successfully searched');
+      return products;
+    } catch (error) {
+      logger.error("Products weren't successfully found, error: " + error);
+      throw new HttpException(
+        'Something went wrong with your request',
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
+
   @Get(':lm')
   async findOneProduct(@Param('lm') lm: string): Promise<IProduct> {
     try {
@@ -79,7 +95,7 @@ export class ProductController {
       logger.error(
         'Product with lm: ' +
           lm +
-          " wassn't successfully found, error: " +
+          " wasn't successfully found, error: " +
           error,
       );
       throw new HttpException(

@@ -9,9 +9,9 @@ Steps to complete the challenge:
 - [x] Treat excel and write on database on the consumer;
 - [ ] Create tests to ensure last step will work as it should;
 - [x] Create endpoint to verify if the excel file was processed (using database?);
-- [ ] Create tests to ensure last step will work as it should;
+- [x] Create tests to ensure last step will work as it should;
 - [x] Create READ, UPDATE, DELETE operations on api-gateway;
-- [ ] Create tests to ensure last step will work as it should;
+- [x] Create tests to ensure last step will work as it should;
 - [x] Validate file format;
 - [ ] Create a documentation to describe the project and how to launch it;
 - [ ] Create code documentation;
