@@ -16,6 +16,21 @@ export class ProductService {
     private readonly productsModel: Model<IMongoProduct>,
   ) {}
 
+  fileIsValid(file: string): boolean {
+    const [lm, name, free_shipping, description, price, category] = file
+      .split('\n')[0]
+      .split(';');
+
+    return (
+      lm === 'lm' &&
+      name === 'name' &&
+      free_shipping === 'free_shipping' &&
+      description === 'description' &&
+      price === 'price' &&
+      category === 'category'
+    );
+  }
+
   create(file: IFile): Promise<string> {
     return this.send2Queue
       .emit('createFile', file)

@@ -31,15 +31,19 @@ export class ProductController {
   async uploadFile(file: IFile): Promise<string> {
     try {
       const content = file.buffer.toString();
-      const processedFileId = randomBytes(64).toString('hex');
-      console.log(processedFileId);
-      const response = await this.productService.create({
-        ...file,
-        content,
-        processedFileId,
-      });
-      logger.log('File sended to queue');
-      return response;
+
+      if (this.productService.fileIsValid(content)) {
+        const processedFileId = randomBytes(64).toString('hex');
+        const response = await this.productService.create({
+          ...file,
+          content,
+          processedFileId,
+        });
+        logger.log('File sended to queue');
+        return response;
+      } else {
+        throw new Error('Invalid format');
+      }
     } catch (error) {
       logger.error('Something went wrong with the request: ' + error.message);
       throw new HttpException(
