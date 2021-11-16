@@ -1,5 +1,5 @@
 export interface IFile {
-  ieldname: string;
+  fieldname: string;
   originalname: string;
   encoding: string;
   mimetype: string;

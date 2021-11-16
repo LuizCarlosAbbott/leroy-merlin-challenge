@@ -14,7 +14,7 @@ Steps to complete the challenge:
 - [x] Create tests to ensure last step will work as it should;
 - [x] Validate file format;
 - [x] Create a documentation to describe the project and how to launch it;
-- [ ] Create code documentation;
+- [x] Create code documentation;
 - [ ] Upload api-gateway to Heroku connected to a database (without the RabbitMQ connection);
 
 ## Project requirements
@@ -81,4 +81,4 @@ $ yarn test:cov
 
 ## Instructions
 
-You can be importing the file `Insomnia_2021-11-16` located in the root directory to your Insomnia to use as an example for testing the application endpoints.
+You can be importing the file `Insomnia_2021-11-16` located in the root directory to your Insomnia to use as an example for testing the application endpoints. Its also possible to access the api-gateway application location in the route `/api` (<b><http://localhost:3000/api></b>) to see the swagger documentation

@@ -18,9 +18,9 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { IFile } from './interfaces/file.interface';
 import { randomBytes } from 'crypto';
 import { IProduct } from './interfaces/product.interface';
+import { ApiBody, ApiDefaultResponse, ApiParam } from '@nestjs/swagger';
 
 const logger = new Logger('API Gateway');
-
 @Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
@@ -28,6 +28,20 @@ export class ProductController {
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   @Bind(UploadedFile())
+  @ApiParam({
+    name: 'file',
+    format: 'multipart/form-data',
+    description: `You have to upload a text file that needs to have the following structure: <br/><br/>
+    lm;name;free_shipping;description;price;category <br/>
+    1001;Furadeira X;0;Furadeira eficiente X;100.00;123123 <br/>
+    1002;Furadeira Y;1;Furadeira super eficiente Y;140.00;123123 <br/>
+    `,
+  })
+  @ApiDefaultResponse({
+    type: String,
+    status: 200,
+    description: 'Returns a text with the identifier of the file uploaded',
+  })
   async uploadFile(file: IFile): Promise<string> {
     try {
       const content = file.buffer.toString();
@@ -54,6 +68,17 @@ export class ProductController {
   }
 
   @Get('processedfile/:id')
+  @ApiDefaultResponse({
+    type: String,
+    status: 200,
+    description:
+      'Returns a text confirmating if the file was successfully processed',
+  })
+  @ApiParam({
+    name: 'id',
+    example:
+      '9d444b94bc92d1017cdea5fb87bf5f804d0df77d7163a46038e5ba59dfcf9e5f5d998b4c9a2962b007b3bf4a1c8311bb32baf0ab8e5ea0d98e59710d4257a620',
+  })
   async findProcessedFile(@Param('id') id: string): Promise<string> {
     try {
       const processedFile = await this.productService.findProcessedFile(id);
@@ -69,6 +94,11 @@ export class ProductController {
   }
 
   @Get()
+  @ApiDefaultResponse({
+    type: [IProduct],
+    status: 200,
+    description: 'Returns an array of products from the database',
+  })
   async findAllProducts(): Promise<IProduct[]> {
     try {
       const products = await this.productService.findAllProducts();
@@ -85,6 +115,15 @@ export class ProductController {
   }
 
   @Get(':lm')
+  @ApiParam({
+    name: 'lm',
+    example: '1002',
+  })
+  @ApiDefaultResponse({
+    type: IProduct,
+    status: 200,
+    description: 'Returns an product from the database',
+  })
   async findOneProduct(@Param('lm') lm: string): Promise<IProduct> {
     try {
       const product = await this.productService.findOneProduct(+lm);
@@ -106,6 +145,16 @@ export class ProductController {
   }
 
   @Patch(':lm')
+  @ApiParam({
+    name: 'lm',
+    example: '1002',
+  })
+  @ApiBody({ type: IProduct })
+  @ApiDefaultResponse({
+    type: IProduct,
+    status: 200,
+    description: 'Updates a product and returns the updated product',
+  })
   async updateOneProduct(
     @Param('lm') lm: string,
     @Body() product: IProduct,
@@ -132,6 +181,15 @@ export class ProductController {
   }
 
   @Delete(':lm')
+  @ApiParam({
+    name: 'lm',
+    example: '1002',
+  })
+  @ApiDefaultResponse({
+    type: IProduct,
+    status: 200,
+    description: 'Removes a product and returns the removed product',
+  })
   async removeOneProduct(@Param('lm') lm: string): Promise<string> {
     try {
       const result = await this.productService.removeOneProduct(+lm);
