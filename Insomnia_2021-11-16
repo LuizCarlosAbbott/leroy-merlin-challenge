@@ -1,0 +1,476 @@
+{
+	"log": {
+		"version": "1.2",
+		"creator": {
+			"name": "Insomnia REST Client",
+			"version": "insomnia.desktop.app:v2020.4.1"
+		},
+		"entries": [
+			{
+				"startedDateTime": "2021-11-16T22:48:34.702Z",
+				"time": 28.589,
+				"request": {
+					"method": "GET",
+					"url": "http://localhost:3000/product",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [],
+					"queryString": [],
+					"postData": {
+						"mimeType": "",
+						"text": "",
+						"params": []
+					},
+					"headersSize": -1,
+					"bodySize": -1,
+					"settingEncodeUrl": true
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"name": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"name": "Content-Length",
+							"value": "770"
+						},
+						{
+							"name": "ETag",
+							"value": "W/\"302-6Q0cP+3Q4AEIJJvLhQjRwgTu+OE\""
+						},
+						{
+							"name": "Date",
+							"value": "Mon, 15 Nov 2021 23:31:51 GMT"
+						},
+						{
+							"name": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"name": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"content": {
+						"size": 770,
+						"mimeType": "application/json; charset=utf-8",
+						"text": "[{\"_id\":\"619191c3b03bcc342be8c63b\",\"lm\":1001,\"name\":\"Furadeira X\",\"free_shipping\":0,\"description\":\"Furadeira eficiente X\",\"category\":123123,\"__v\":0},{\"_id\":\"619191c3b03bcc342be8c63c\",\"lm\":1002,\"name\":\"Furadeira Y\",\"free_shipping\":1,\"description\":\"Furadeira super eficiente Y\",\"category\":123123,\"__v\":0},{\"_id\":\"619191c3b03bcc342be8c63e\",\"lm\":1008,\"name\":\"Serra de Marmore\",\"free_shipping\":1,\"description\":\"Serra com 1400W modelo 4100NH2Z-127V-L\",\"category\":123123,\"__v\":0},{\"_id\":\"619191c3b03bcc342be8c63f\",\"lm\":1009,\"name\":\"Broca Z\",\"free_shipping\":0,\"description\":\"Broca simples\",\"category\":123123,\"__v\":0},{\"_id\":\"619191c3b03bcc342be8c640\",\"lm\":1010,\"name\":\"Luvas de Proteção\",\"free_shipping\":0,\"description\":\"Luva de proteção básica\",\"category\":123123,\"__v\":0}]"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 28.589,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Products"
+			},
+			{
+				"startedDateTime": "2021-11-16T22:48:34.702Z",
+				"time": 10.278,
+				"request": {
+					"method": "GET",
+					"url": "http://localhost:3000/product/1003",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [],
+					"queryString": [],
+					"postData": {
+						"mimeType": "",
+						"text": "",
+						"params": []
+					},
+					"headersSize": -1,
+					"bodySize": -1,
+					"settingEncodeUrl": true
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"name": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"name": "Content-Length",
+							"value": "153"
+						},
+						{
+							"name": "ETag",
+							"value": "W/\"99-UY8A7nGxbKdysbjP/YeVVPSPw/U\""
+						},
+						{
+							"name": "Date",
+							"value": "Mon, 15 Nov 2021 00:39:11 GMT"
+						},
+						{
+							"name": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"name": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"content": {
+						"size": 153,
+						"mimeType": "application/json; charset=utf-8",
+						"text": "{\"_id\":\"619191c3b03bcc342be8c63d\",\"lm\":1003,\"name\":\"Chave de Fenda X\",\"free_shipping\":1,\"description\":\"Chave de fenda simples\",\"category\":123123,\"__v\":0}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 10.278,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Product ID"
+			},
+			{
+				"startedDateTime": "2021-11-16T22:48:34.702Z",
+				"time": 16.265,
+				"request": {
+					"method": "DELETE",
+					"url": "http://localhost:3000/product/1003",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [],
+					"queryString": [],
+					"postData": {
+						"mimeType": "",
+						"text": "",
+						"params": []
+					},
+					"headersSize": -1,
+					"bodySize": -1,
+					"settingEncodeUrl": true
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"name": "Content-Length",
+							"value": "46"
+						},
+						{
+							"name": "ETag",
+							"value": "W/\"2e-cocwjmNtD4ZXq5s5Ujl/T4IieJY\""
+						},
+						{
+							"name": "Date",
+							"value": "Mon, 15 Nov 2021 00:39:48 GMT"
+						},
+						{
+							"name": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"name": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"content": {
+						"size": 46,
+						"mimeType": "text/html; charset=utf-8",
+						"text": "Product with lm: 1003 was successfully removed"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 16.265,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Product"
+			},
+			{
+				"startedDateTime": "2021-11-16T22:48:34.702Z",
+				"time": 25.937,
+				"request": {
+					"method": "PATCH",
+					"url": "http://localhost:3000/product/10043",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "application/json"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "application/json",
+						"text": "{\n  \"lm\": 1003,\n  \"name\": \"Chave de Fenda X\",\n  \"free_shipping\": 1,\n  \"description\": \"Chave de fenda simples\",\n  \"category\": 123123\n}",
+						"params": []
+					},
+					"headersSize": -1,
+					"bodySize": -1,
+					"settingEncodeUrl": true
+				},
+				"response": {
+					"status": 400,
+					"statusText": "Bad Request",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"name": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"name": "Content-Length",
+							"value": "69"
+						},
+						{
+							"name": "ETag",
+							"value": "W/\"45-LaF3UPpX3U+SVg36GOJU5S12h8k\""
+						},
+						{
+							"name": "Date",
+							"value": "Mon, 15 Nov 2021 00:27:06 GMT"
+						},
+						{
+							"name": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"name": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"content": {
+						"size": 69,
+						"mimeType": "application/json; charset=utf-8",
+						"text": "{\"statusCode\":400,\"message\":\"Something went wrong with your request\"}"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 25.937,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Product "
+			},
+			{
+				"startedDateTime": "2021-11-16T22:48:34.702Z",
+				"time": 44.142,
+				"request": {
+					"method": "POST",
+					"url": "http://localhost:3000/product/upload",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "Content-Type",
+							"value": "multipart/form-data"
+						}
+					],
+					"queryString": [],
+					"postData": {
+						"mimeType": "multipart/form-data",
+						"text": "",
+						"params": [
+							{
+								"name": "file",
+								"value": ""
+							}
+						]
+					},
+					"headersSize": -1,
+					"bodySize": -1,
+					"settingEncodeUrl": true
+				},
+				"response": {
+					"status": 201,
+					"statusText": "Created",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"name": "Content-Length",
+							"value": "239"
+						},
+						{
+							"name": "ETag",
+							"value": "W/\"ef-SFFNlghSIuPnzo9LzYvDBwP7QHs\""
+						},
+						{
+							"name": "Date",
+							"value": "Mon, 15 Nov 2021 00:52:35 GMT"
+						},
+						{
+							"name": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"name": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"content": {
+						"size": 239,
+						"mimeType": "text/html; charset=utf-8",
+						"text": "The content was send to the queue, you can check if the file was processed using the following identification: 6f29b31cb9f1aac9696507eacbba667f6038d559ffbc7345158eb1d8be92373676574fb13f3324865f34b96930db558aa230e23510d36a7839e42bbdf2472213"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 44.142,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Upload excel"
+			},
+			{
+				"startedDateTime": "2021-11-16T22:48:34.702Z",
+				"time": 3.391,
+				"request": {
+					"method": "GET",
+					"url": "http://localhost:3000/product/processedfile/6a631f85d856616e5396c70020846080101349c5995caacdcd88308c828196d55bdbeac1f955c99635f8b4b3c168b40079c529b6bdf92a5217e4ab7f3786292c",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [],
+					"queryString": [],
+					"postData": {
+						"mimeType": "",
+						"text": "",
+						"params": []
+					},
+					"headersSize": -1,
+					"bodySize": -1,
+					"settingEncodeUrl": true
+				},
+				"response": {
+					"status": 200,
+					"statusText": "OK",
+					"httpVersion": "HTTP/1.1",
+					"cookies": [],
+					"headers": [
+						{
+							"name": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"name": "Content-Type",
+							"value": "text/html; charset=utf-8"
+						},
+						{
+							"name": "Content-Length",
+							"value": "38"
+						},
+						{
+							"name": "ETag",
+							"value": "W/\"26-oG0+TbDK3qbagE5whLKvWmNTqqs\""
+						},
+						{
+							"name": "Date",
+							"value": "Sun, 14 Nov 2021 22:56:24 GMT"
+						},
+						{
+							"name": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"name": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"content": {
+						"size": 38,
+						"mimeType": "text/html; charset=utf-8",
+						"text": "The file wasn't processed successfully"
+					},
+					"redirectURL": "",
+					"headersSize": -1,
+					"bodySize": -1
+				},
+				"cache": {},
+				"timings": {
+					"blocked": -1,
+					"dns": -1,
+					"connect": -1,
+					"send": 0,
+					"wait": 3.391,
+					"receive": 0,
+					"ssl": -1
+				},
+				"comment": "Processed files"
+			}
+		]
+	}
+}
